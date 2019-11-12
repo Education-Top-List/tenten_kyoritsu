@@ -14,10 +14,10 @@
 /* ADV */
 function tg_contact_custom_post_type_adv() {
 	$labels = array(
-		'name' 				=> 'Slide Về Sâm',
-		'singular_name' 	=> 'Slide Về Sâm',
-		'menu_name'			=> 'Slide Về Sâm',
-		'name_admin_bar'	=> 'Slide Về Sâm'
+		'name' 				=> 'People Say',
+		'singular_name' 	=> 'People Say',
+		'menu_name'			=> 'People Say',
+		'name_admin_bar'	=> 'People Say'
 	);
 	
 	$args = array(
@@ -31,17 +31,16 @@ function tg_contact_custom_post_type_adv() {
 		'supports'			=> array( 'title', 'thumbnail' , 'excerpt' ),
 	);
 
-	// register_taxonomy(
-	// 	'adv_category',
-	// 	'adv',
-	// 	array(
-	// 		'label' => __( 'Chuyên mục' ),
-	// 		'rewrite' => array( 'slug' => 'category_adv' ),
-	// 		'hierarchical' => true,
-	// 	)
-	// );
+	register_taxonomy(
+		'people_says',
+		'peoplesays',
+		array(
+			'label' => false, // label in menu admin sidebar left
+			'hierarchical' => true
+		)
+	);
 
-	register_post_type( 'adv', $args );
+	register_post_type( 'peoplesays', $args );
 	
 }
 

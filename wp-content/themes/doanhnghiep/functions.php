@@ -1,6 +1,6 @@
 <?php
 include get_template_directory().'/includes/admin/function-admin.php';
-//include get_template_directory().'/includes/admin/core.php';
+include get_template_directory().'/includes/admin/add_meta_box.php';
 include get_template_directory().'/includes/admin/custom-post-type.php';  
 
 function load_admin_style() {
@@ -62,45 +62,14 @@ function featured_images_setup(){
   // ADD OUR WIDGETS LOCATION
   function our_widget_inits(){
 	register_sidebar(array(
-		'name' => 'Sidebar',
-		'id' => 'sidebar1',
+		'name' => 'Sidebar Archive',
+		'id' => 'sidebar_archive',
 		'before_widget' => '<div id="%1$s" class="widget %2$s widget_area">',
 		'after_widget' => "</div>",
 		'before_title' => '<h3 class="widget-title">',
 		'after_title' => '</h3>',
 	));
-    register_sidebar(array(
-    'name' => 'video_home',
-    'id' => 'video_home_id',
-    'before_widget' => '<div id="%1$s" class="widget %2$s widget_area">',
-    'after_widget' => "</div>",
-    'before_title' => '<h3 class="widget-title">',
-    'after_title' => '</h3>',
-  ));
-	register_sidebar(array(
-		'name' => 'Footer area 1',
-		'id' => 'footer1',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	));
-	register_sidebar(array(
-		'name' => 'Footer area 2',
-		'id' => 'footer2',
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
-	));
-  register_sidebar(array(
-    'name' => 'Footer area 3',
-    'id' => 'footer3',
-    'before_title' => '<h3 class="widget-title">',
-    'after_title' => '</h3>',
-  ));
-register_sidebar(array(
-    'name' => 'Footer area 4',
-    'id' => 'footer4',
-    'before_title' => '<h3 class="widget-title">',
-    'after_title' => '</h3>',
-  ));
+
 }
   add_action('widgets_init','our_widget_inits');
   /** Filter & Hook In Widget Before Post Content .*/

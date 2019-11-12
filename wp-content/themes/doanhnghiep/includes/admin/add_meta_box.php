@@ -3,7 +3,7 @@
   // ADD META BOX
 
 function status_event_dropdown(){
-    add_meta_box('tinh-trang-dropdown','Trạng thái dropdowns','tg_status_ouput_dropdown','post');
+    add_meta_box('tinh-trang-dropdown','Trạng thái dropdowns','tg_status_ouput_dropdown',array('peoplesays'));
 }
 add_action('add_meta_boxes','status_event_dropdown');
 

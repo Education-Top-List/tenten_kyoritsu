@@ -74,12 +74,20 @@
 		</div>
 		<div class="bottom_header">
 			<div class="container">
-					<nav class="nav nav_primary">
+				<nav class="nav nav_primary">
 					<?php 
 					$args = array('theme_location' => 'primary');
 					?>
 					<?php wp_nav_menu($args); ?>
-			</nav>
+				</nav>
+				<div class="search_header">
+					<form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+				<label for="s">tìm kiếm cho</label>
+				<input type="text" name="s" id="s" value="<?php the_search_query(); ?>" placeholder="Nhập nội dung tìm kiếm" />
+				<input type="submit" id="searchsubmit" value="Tìm kiếm">
+			</form>
+					
+				</div>
 			</div>
 		</div>
 		<?php if(is_front_page() && !is_home()){ ?>
