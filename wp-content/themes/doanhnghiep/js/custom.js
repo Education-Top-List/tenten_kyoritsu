@@ -198,20 +198,44 @@ jQuery(document).ready(function(){
 					}
 					]
 				});
-		// STICKY NAVBAR
-		if(jQuery('body').hasClass('page-template-page-template-phunubamuoi') || jQuery('body').hasClass('page-template-page-template-phunusausinh' ) || jQuery('body').hasClass('page-template-page-template-chuyengiatuvan' ) ){
-			var sticky = document.querySelector('.sticky');
-		if (sticky.style.position !== 'sticky') {
-			var stickyTop = sticky.offsetTop;
-			document.addEventListener('scroll', function () {
-				window.scrollY >= stickyTop ?
-				sticky.classList.add('fixed_menu') :
-				sticky.classList.remove('fixed_menu');
-			});
-		}
-		console.log('sticky');
-		}
-		
+			jQuery('.wrap_list_idx .list_post_category ').slick({
+				dots: false,
+				infinite: true,
+				speed: 300,
+				slidesToShow: 4,
+				slidesToScroll: 1,
+				autoplay: true,
+				autoplaySpeed: 2000,
+				arrows:true,
+					// fade: true,
+					cssEase: 'linear',
+					responsive: [
+					{
+						breakpoint: 1024,
+						settings: {
+							slidesToShow: 2,
+							slidesToScroll: 1,
+							infinite: false,
+							dots: false
+						}
+					},
+					{
+						breakpoint: 600,
+						settings: {
+							slidesToShow: 2,
+							slidesToScroll: 1
+						}
+					},
+					{
+						breakpoint: 480,
+						settings: {
+							slidesToShow: 2,
+							slidesToScroll: 1
+						}
+					}
+					]
+				});
+
 		// MENU MOBILE
 		jQuery(".icon_mobile_click").click(function(){
 			jQuery(this).fadeOut(300);

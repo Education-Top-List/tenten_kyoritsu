@@ -1,6 +1,6 @@
 <?php
 include get_template_directory().'/includes/admin/function-admin.php';
-include get_template_directory().'/includes/admin/core.php';
+//include get_template_directory().'/includes/admin/core.php';
 include get_template_directory().'/includes/admin/custom-post-type.php';  
 
 function load_admin_style() {
@@ -478,27 +478,47 @@ $CT_TAX_META = new CT_TAX_META();
 $CT_TAX_META -> init();
  
 
-function shortcode_product_append_page(){
-      $args = array(
-          'post_type' => 'page',
-          'post__in' => array(358) //list of page_ids
-      );
-        $page_query = new WP_Query( $args );
-        if( $page_query->have_posts() ) :
-          echo '<div class="pages-on-page">';
-        //print any general title or any header here//
-          while( $page_query->have_posts() ) : $page_query->the_post();
-            echo '<div class="page-on-page" id="page_id-' . $post->ID . '">';
-            echo the_content();
-            echo '</div>';
-          endwhile;
-          echo '</div>';
-        else:
-        //optional text here is no pages found//
-        endif;
-        wp_reset_postdata();
+// SHOW LIST SUBCATEGORY
+class ListCategories{
+  static function list_categories($atts, $content = null) {
+    $atts = shortcode_atts(
+      array(
+        'show_option_all'    => '',
+        'orderby'            => 'name',
+        'order'              => 'ASC',
+        'style'              => 'list',
+        'show_count'         => 0,
+        'hide_empty'         => 1,
+        'use_desc_for_title' => 1,
+        'child_of'           => 0,
+        'feed'               => '',
+        'feed_type'          => '',
+        'feed_image'         => '',
+        'exclude'            => '',
+        'exclude_tree'       => '',
+        'include'            => '',
+        'hierarchical'       => 1,
+        'title_li'           => __( '' ),
+        'show_option_none'   => __( '' ),
+        'number'             => null,
+        'echo'               => 1,
+        'depth'              => 1,
+        'current_category'   => 1,
+        'pad_counts'         => 0,
+        'taxonomy'           => 'category',
+        'walker'             => null
+      ), $atts
+    );
+
+    ob_start();
+    wp_list_categories($atts);
+    $output = ob_get_contents();
+    ob_end_clean();
+    return $output;
+  }
 }
-add_shortcode('product_append_page','shortcode_product_append_page');
+add_shortcode( 'list_catgory', array('ListCategories', 'list_categories') );
+// END SHOW LIST SUBCATEGORY
 
 
 }
