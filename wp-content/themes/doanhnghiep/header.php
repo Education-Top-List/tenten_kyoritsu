@@ -81,12 +81,11 @@
 					<?php wp_nav_menu($args); ?>
 				</nav>
 				<div class="search_header">
+					<i class="fa fa-search"></i>
 					<form role="search" method="get" id="searchform" class="searchform" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-				<label for="s">tìm kiếm cho</label>
-				<input type="text" name="s" id="s" value="<?php the_search_query(); ?>" placeholder="Nhập nội dung tìm kiếm" />
-				<input type="submit" id="searchsubmit" value="Tìm kiếm">
-			</form>
-					
+						<input type="text" name="s" id="s" value="<?php the_search_query(); ?>" placeholder="" />
+						<input type="submit" id="searchsubmit" value="Search">
+					</form>
 				</div>
 			</div>
 		</div>

@@ -52,43 +52,7 @@ jQuery(document).ready(function(){
 					]
 				});
 
-			jQuery('.slide_richair ul ').slick({
-				dots: false,
-				infinite: true,
-				speed: 300,
-				slidesToShow: 2,
-				slidesToScroll: 1,
-				autoplay: true,
-				autoplaySpeed: 2000,
-					// fade: true,
-					cssEase: 'linear',
-					responsive: [
-					{
-						breakpoint: 1024,
-						settings: {
-							slidesToShow: 2,
-							slidesToScroll: 1,
-							infinite: false,
-							dots: false
-						}
-					},
-					{
-						breakpoint: 600,
-						settings: {
-							slidesToShow: 2,
-							slidesToScroll: 1
-						}
-					},
-					{
-						breakpoint: 480,
-						settings: {
-							slidesToShow: 2,
-							slidesToScroll: 1
-						}
-					}
-					]
-				});
-				jQuery('#featured_work .textwidget ul ').slick({
+				jQuery('#featured_work .wrap_featured_work  ').slick({
 				dots: false,
 				infinite: true,
 				speed: 300,
@@ -235,7 +199,9 @@ jQuery(document).ready(function(){
 					}
 					]
 				});
-
+		jQuery('.search_header>i.fa').click(function(){
+			jQuery('.search_header>form').toggle(300);
+		});
 		// MENU MOBILE
 		jQuery(".icon_mobile_click").click(function(){
 			jQuery(this).fadeOut(300);

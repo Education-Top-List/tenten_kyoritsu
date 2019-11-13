@@ -86,137 +86,95 @@ function myshortcode(){
 add_shortcode('social_ft','myshortcode');
 
 function shortcode_news(){
-		ob_start();
-		?>
-			<?php 
-						$arg_cmt_post_q = array(
-							'posts_per_page' => 3,
-							'orderby' => 'post_date',
-							'order' => 'DESC',
-							'post_type' => 'post',
-							'post_status' => 'publish',
-							'cat' => array(2)
-						);
-						$cmt_post_q = new WP_Query();
-						$cmt_post_q->query($arg_cmt_post_q);
-						?>
-						<?php if(have_posts()) : ?>
-							<ul>
-								<?php
-								while ($cmt_post_q->have_posts()) : $cmt_post_q->the_post(); ?>
-									<li class="col-sm-4">
-										<div class="post_cmt_wrapper">
-											<div class="wrap_thumb">
-												<?php  $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );  ?>
-												<figure class="thumbnail" style="background:url('<?php echo $image[0]; ?>');"> 
-													<a href="<?php the_permalink();?>"></a>
-												</figure>	
-											</div>
-											<h3><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a> </h3>
-											<div class="excerpt">
-												<p><?php echo excerpt(50); ?></p>
-											</div>
-											<div class="read_more">
-												<a href="<?php the_permalink(); ?>"><?php if(get_locale() == 'en_US'){echo 'Read more >';} else { echo 'Xem thêm';}  ?></a>
-											</div>
-										</div>
-									</li>
-								<?php endwhile; ?>
-							<?php endif; ?> 
-						</ul>
-		<?php
+	ob_start();
+	?>
+	<?php 
+	$arg_cmt_post_q = array(
+		'posts_per_page' => 3,
+		'orderby' => 'post_date',
+		'order' => 'DESC',
+		'post_type' => 'post',
+		'post_status' => 'publish',
+		'cat' => array(2)
+	);
+	$cmt_post_q = new WP_Query();
+	$cmt_post_q->query($arg_cmt_post_q);
+	?>
+	<?php if(have_posts()) : ?>
+		<ul>
+			<?php
+			while ($cmt_post_q->have_posts()) : $cmt_post_q->the_post(); ?>
+				<li class="col-sm-4">
+					<div class="post_cmt_wrapper">
+						<div class="wrap_thumb">
+							<?php  $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );  ?>
+							<figure class="thumbnail" style="background:url('<?php echo $image[0]; ?>');"> 
+								<a href="<?php the_permalink();?>"></a>
+							</figure>	
+						</div>
+						<h3><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a> </h3>
+						<div class="excerpt">
+							<p><?php echo excerpt(50); ?></p>
+						</div>
+						<div class="read_more">
+							<a href="<?php the_permalink(); ?>"><?php if(get_locale() == 'en_US'){echo 'Read more >';} else { echo 'Xem thêm';}  ?></a>
+						</div>
+					</div>
+				</li>
+			<?php endwhile; ?>
+		<?php endif; ?> 
+	</ul>
+	<?php
 	return ob_get_clean();
 }
 
 add_shortcode('tg_shortcode_new','shortcode_news');
 
 function shortcode_featured(){
-		ob_start();
-		?>
-			<?php 
-						$arg_cmt_post_q = array(
-							'posts_per_page' => 20,
-							'orderby' => 'post_date',
-							'order' => 'DESC',
-							'post_type' => 'post',
-							'post_status' => 'publish',
-							'cat' => array(6)
-						);
-						$cmt_post_q = new WP_Query();
-						$cmt_post_q->query($arg_cmt_post_q);
-						?>
-						<?php if(have_posts()) : ?>
-							<ul>
-								<?php
-								while ($cmt_post_q->have_posts()) : $cmt_post_q->the_post(); ?>
-									<li>
-										<div class="post_cmt_wrapper">
-											<div class="wrap_thumb">
-												<?php  $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );  ?>
-												<figure class="thumbnail" style="background:url('<?php echo $image[0]; ?>');"> 
-													<a href="<?php the_permalink();?>"></a>
-												</figure>	
-											</div>
-											<h3><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a> </h3>
-										</div>
-									</li>
-								<?php endwhile; ?>
-							<?php endif; ?> 
-						</ul>
-		<?php
-	return ob_get_clean();
-}
-
-add_shortcode('tg_shortcode_featured','shortcode_featured');
-
-function newProduct(){
 	ob_start();
 	?>
-	<div class="new_product">
-					<div class="container">
-						<div class="wrap_new_product">
-							<div class="tit_view">
-								<h3>New product</h3>
-								<a href="<?php echo get_category_link(5); ?>">View All Products →</a>
-							</div>
-							
-							<ul class="row">
-								<?php 
-								$list_post_arg = array(
-									'posts_per_page' => 3,
-									'orderby' => 'post_date',
-									'order' => 'DESC',
-									'post_type' => 'post',
-									'post_status' => 'publish',
-									'cat' => 2
-								);
-								$list_post_q = new WP_Query();
-								$list_post_q->query($list_post_arg);
-								?>
-								<?php
-								while($list_post_q->have_posts()): $list_post_q->the_post();
-									?>
-									<li class="list_post_item pw col-sm-4">
-										<?php  $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' );  ?>
-										<figure class="thumbnail" style="background:url('<?php echo $image[0]; ?>');"><a href="<?php echo get_page_link(14); ?>"><?php //the_post_thumbnail();?></a> </figure>
-										<h2 class="post_title"><a href="<?php echo the_permalink();?>"><?php the_title(); ?></a></h2>
-										<div class="excerpt">
-											<p><?php echo excerpt(30); ?></p>
-										</div>
-									</li>
+	<?php    
+                        $parent  = get_categories(array('parent'=>7));  // parent=>0 loop all
+                        ?>
+                        <div class="wrap_featured_work">
+                        	<?php
+                        	foreach ( $parent as $category ) {
 
-									<?php
-								endwhile;
-								?>
-							</ul>
-						</div>
+                        		$args = array(
+                        			'cat' => $category->term_id,
+                        			'post_type' => 'post',
+                        			'posts_per_page' => '5',
+                        		//'category__not_in' => array( 38 )
+                        		);
+                        		$query = new WP_Query( $args );
 
-					</div>
-				</div>
-	<?php
-	return ob_get_clean();
-}
-add_shortcode('sc_newpd','newProduct');
+                        		if ( $query->have_posts() ) { ?>
+                        			<div class="listing">
+                        				<?php  $catgory_id = get_cat_ID($category->name);
+                        				$category_link = get_category_link( $catgory_id );
+                        				$image_id = get_term_meta ( $category->term_id, 'category-image-id', true );
+                        				$src_image = wp_get_attachment_image_src( $image_id , 'full');
+                                    //echo $src_image[0];
+                        				?>
+                        				<div class="product_inner">
+                        					<div class="wrap_thumb">
+                        						<figure class="thumbnail" style="background:url('<?php echo $src_image[0];?>') "><a href="<?php echo get_page_link(23); ?>"></a></figure>	
+                        					</div>
+                        					<h2><a href="<?php echo get_page_link(23); ?>"><?php echo $category->name; ?></a></h2>
+                        				</div>
+                        			</div>
+                     <?php } // end if
+                        // Use reset to restore original query.
+                     wp_reset_postdata();
+                 }
+                 ?>
+             </div>
+             <?php
+             return ob_get_clean();
+         }
+
+         add_shortcode('tg_shortcode_featured','shortcode_featured');
+
 /* Display Page
 -----------------------------------------------------------------*/
 function zang_theme_create_page() {
@@ -229,8 +187,8 @@ function zang_theme_create_page() {
 		?>  
 
 		<ul class="nav-tab-wrapper"> 
-		<li><a href="?page=template_admin_zang&tab=header_page_options" class="nav-tab <?php echo $active_tab == 'header_page_options' ? 'nav-tab-active' : ''; ?>">Social Header</a> </li>
-		<li><a href="?page=template_admin_zang&tab=footer_page_options" class="nav-tab <?php echo $active_tab == 'footer_page_options' ? 'nav-tab-active' : ''; ?>">Social Footer</a></li>
+			<li><a href="?page=template_admin_zang&tab=header_page_options" class="nav-tab <?php echo $active_tab == 'header_page_options' ? 'nav-tab-active' : ''; ?>">Social Header</a> </li>
+			<li><a href="?page=template_admin_zang&tab=footer_page_options" class="nav-tab <?php echo $active_tab == 'footer_page_options' ? 'nav-tab-active' : ''; ?>">Social Footer</a></li>
 		</ul>  
 
 		<form method="post" action="options.php">  

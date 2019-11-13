@@ -9,14 +9,12 @@
         );
         $page_query = new WP_Query( $args );
         if( $page_query->have_posts() ) :
-        echo '<div class="pages-on-page">';
         //print any general title or any header here//
         while( $page_query->have_posts() ) : $page_query->the_post();
         echo '<div class="page-on-page" id="page_id-' . $post->ID . '">';
         echo the_content();
         echo '</div>';
         endwhile;
-        echo '</div>';
         else:
         //optional text here is no pages found//
         endif;

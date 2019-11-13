@@ -16,7 +16,7 @@ get_header();
                         		'cat' => $category->term_id,
                         		'post_type' => 'post',
                         		'posts_per_page' => '5',
-                        		'category__not_in' => array( 38 )
+                        		//'category__not_in' => array( 38 )
                         	);
                         	$query = new WP_Query( $args );
                         	
@@ -24,6 +24,9 @@ get_header();
                         		<div class="<?php echo $category->name; ?> listing">
                         			<?php  $catgory_id = get_cat_ID($category->name);
                         			$category_link = get_category_link( $catgory_id );
+                                    $image_id = get_term_meta ( $category->term_id, 'category-image-id', true );
+                                    $src_image = wp_get_attachment_image_src( $image_id , 'full');
+                                    //echo $src_image[0];
                         			?>
                         			<div class="list_subcat">
                         				<h2><span><?php echo $category->name; ?></span></h2>

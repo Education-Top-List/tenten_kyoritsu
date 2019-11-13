@@ -17,57 +17,60 @@ get_header();
 			<div class="list_logo">
 				<div class="container">
 					<ul>
-						<li><a href="#"><figure><img src="<?php echo BASE_URL; ?>/images/dt1.png"></figure></a></li>
-						<li><a href="#"><figure><img src="<?php echo BASE_URL; ?>/images/dt2.png"></figure></a></li>
-						<li><a href="#"><figure><img src="<?php echo BASE_URL; ?>/images/dt3.png"></figure></a></li>
-						<li><a href="#"><figure><img src="<?php echo BASE_URL; ?>/images/dt4.png"></figure></a></li>
-						<li><a href="#"><figure><img src="<?php echo BASE_URL; ?>/images/dt5.png"></figure></a></li>
-						<li><a href="#"><figure><img src="<?php echo BASE_URL; ?>/images/dt6.png"></figure></a></li>
-						<li><a href="#"><figure><img src="<?php echo BASE_URL; ?>/images/dt1.png"></figure></a></li>
+						<?php
+						$args = array(  
+							'post_type' => 'partners',
+							'post_status' => 'publish',
+							'orderby' => 'title', 
+							'order' => 'ASC'
+						);
+
+						$loop_partner = new WP_Query( $args ); 
+
+						while ( $loop_partner->have_posts() ) : $loop_partner->the_post(); 
+    	//echo the_title();
+							?> <li class="pw"> <figure class="thumbnail"> <a href="<?php echo get_the_excerpt(); ?>" target="_blank"><?php the_post_thumbnail();?></a> </figure> </li> <?php
+						endwhile;
+						wp_reset_postdata(); 
+						?>
 					</ul>
 				</div>
 			</div>
+
+			
+
 			<div class="peoples_say">
 				<div class="container">
 					<h3 class="widget-title">What people say</h3>
 					<ul>
-						<li>
-							<div class="cus_comment">
-								<p>Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibuNulla vitae elit libero, a pharetra augue.</p>
+				<?php
+				$args = array(  
+					'post_type' => 'peoplesays',
+					'post_status' => 'publish',
+					'orderby' => 'title', 
+					'order' => 'ASC'
+				);
+
+				$loop_partner = new WP_Query( $args ); 
+				while ( $loop_partner->have_posts() ) : $loop_partner->the_post(); 
+					?> 
+					<li>
+						<div class="cus_comment">
+							<p><?php echo get_the_excerpt();?></p>
+						</div>
+						<div class="cus_avatar">
+							<figure><?php the_post_thumbnail();?></figure>
+							<div class="info_cus">
+								<p><?php the_title(); ?></p>
+								<span><?php echo get_post_meta( $post->ID, '_inputjob', true ); ?></span>
 							</div>
-							<div class="cus_avatar">
-								<figure><img src="<?php echo BASE_URL; ?>/images/men1.jpg"></figure>
-								<div class="info_cus">
-									<p>Alan Gordon</p>
-									<span>Contractor</span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="cus_comment">
-								<p>Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibuNulla vitae elit libero, a pharetra augue.</p>
-							</div>
-							<div class="cus_avatar">
-								<figure><img src="<?php echo BASE_URL; ?>/images/men2.jpg"></figure>
-								<div class="info_cus">
-									<p>Alan Gordon</p>
-									<span>Contractor</span>
-								</div>
-							</div>
-						</li>
-						<li>
-							<div class="cus_comment">
-								<p>Nulla vitae elit libero, a pharetra augue. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Fusce dapibuNulla vitae elit libero, a pharetra augue.</p>
-							</div>
-							<div class="cus_avatar">
-								<figure><img src="<?php echo BASE_URL; ?>/images/men3.jpg"></figure>
-								<div class="info_cus">
-									<p>Alan Gordon</p>
-									<span>Contractor</span>
-								</div>
-							</div>
-						</li>
-					</ul>
+						</div>
+					</li>
+					<?php
+				endwhile;
+				wp_reset_postdata(); 
+				?>
+			</ul>
 				</div>
 			</div>
 		</div>
